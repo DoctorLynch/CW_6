@@ -54,7 +54,7 @@ def generate_new_password(request):
     )
     request.user.set_password(new_password)
     request.user.save()
-    return redirect(reverse('shop:list'))
+    return redirect(reverse('mailing:home'))
 
 
 def verify_email(request, email):
@@ -64,5 +64,5 @@ def verify_email(request, email):
         if user.verify_code == code:
             user.is_active = True
             user.save()
-            return redirect(reverse('shop:list'))
+            return redirect(reverse('mailing:home'))
     return render(request, 'users/verification.html')

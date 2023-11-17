@@ -3,6 +3,8 @@
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:home' %}">Главная</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:client_list' %}">Клиенты</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:mailing' %}">Рассылки</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'mailing:delivery_report' %}">Отчеты о доставке</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'blog:list' %}">Блоги</a>
         {% if user.is_authenticated %}
             <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>

@@ -4,7 +4,7 @@
 {% if request.user.is_authenticated %}
     <div class="container text-center" xmlns="">
         <div class="col-12 mb-5">
-           <a class="btn btn-outline-primary" href="{% url 'mailing:create_client' %}"  type="button" class="btn btn-lg btn-block btn-outline-primary">Добавить запись</a>
+           <a class="btn btn-outline-primary" href="{% url 'mailing:create_client' %}"  type="button" class="btn btn-lg btn-block btn-outline-primary">Добавить клиента</a>
             {% for object in object_list %}
         <div class="row">
             <div class="col">
@@ -12,12 +12,6 @@
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{ object }}</h4>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4 text-start m-3 ">
-                        </ul>
-                        <a href="{% url 'client:view' object.pk %}"  type="button" class="btn btn-lg btn-block btn-outline-primary">Описание</a>
-                        <a href="{% url 'client:delete' object.pk %}"  type="button" class="btn btn-lg btn-block btn-outline-primary">Удалить</a>
-                        <a href="{% url 'client:edit' object.pk %}"  type="button" class="btn btn-lg btn-block btn-outline-primary">Изменить</a>
                     </div>
                 </div>
                 {% endfor %}
