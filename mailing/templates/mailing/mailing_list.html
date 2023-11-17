@@ -1,0 +1,22 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+    <h2>Mailing List</h2>
+    <ul>
+        {% if user.is_authenticated %}
+            <div class="col-12 mb-5">
+                <a class="btn btn-outline-primary" href="{% url 'mailing:create_mailing' %}">Добавить запись</a>
+            </div>
+        {% endif %}
+        {% for mailing in mailings %}
+
+            <li><a href="{% url 'mailing:mailing_detail' mailing.pk %}">{{ mailing.start_time }}
+                - {{ mailing.end_time }}  </a>
+                {% if mailing.owner.email == user.email or 'Managers' in user_group_names %}
+                    <a class="btn btn-outline-primary" href="{% url 'mailing:delete_mailing' mailing.pk %}">Удалить</a>
+                    <a class="btn btn-outline-primary" href="{% url 'mailing:update_mailing' mailing.pk %}">Редактировать</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

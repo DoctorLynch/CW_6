@@ -1,0 +1,59 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+    {% block content %}
+{% if request.user.is_authenticated %}
+            <div class="col-12">
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">
+                              Информация о клиенте
+                            </h3>
+                          </div>
+                     <div class="card-body">
+                       <table class="table">
+                         <tr>
+                           <td>Категория товара</td>
+                           <td>{{ object.category }}</td>
+                         </tr>
+                         <tr>
+                           <td>Цена</td>
+                           <td>{{ object.purchase_price }}$</td>
+                         </tr>
+                         <tr>
+                           <td>Описание</td>
+                           <td>{{ object.description }}</td>
+                         </tr>
+                       </table>
+                    </div>
+                          <div class="card-footer"></div>
+                      </div>
+                      </div>
+                    <div class="col-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">
+                              Версии продукта
+                                </h3>
+                              </div>
+                            <div class="card-body">
+                            <ul>
+                            {% for version in versions %}
+                                <li>{{ version }}</li>
+                            {% endfor %}
+                            </ul>
+                            </div>
+                            <div class="card-footer"></div>
+                </div>
+            </div>
+{% else %}
+    <div class="col-12">
+            <form class="row-3">
+                <div class="col-3">
+                    <div class="card">
+   <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+   <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Зарегистрироваться</a>
+{% endif %}
+                        {% endblock %}

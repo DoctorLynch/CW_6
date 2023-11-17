@@ -1,0 +1,27 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+    {% block content %}
+{% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <p>Хотите удалить рассылку "{{ object.title }}?"</p>
+                            <button type="submit" class="btn btn-danger">Подтвердить</button>
+                            <a href="{% url 'client:list' %}" class="btn btn-warning">Отмена</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% else %}
+    <div class="col-12">
+            <form class="row-3">
+                <div class="col-3">
+                    <div class="card">
+   <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+   <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Зарегистрироваться</a>
+{% endif %}
+    {% endblock %}

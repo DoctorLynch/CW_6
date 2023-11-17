@@ -1,0 +1,45 @@
+{% extends 'mailing/base.html' %}
+
+{% load my_tags %}
+
+{% block content %}
+    <div class="row text-start">
+        <div class="col-lg-9 col-md-6 col-sm-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr class="align-self-lg-center">
+                            <img class="card-img-top mb-2" style="max-width: 35%"
+                                 src="{% mediafile object.preview_image %} "/>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Заголовок</td>
+                            <td>{{ object.title }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Слаг</td>
+                            <td>{{ object.slug }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Содержание</td>
+                            <td>{{ object.content }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">ID записи</td>
+                            <td>{{ object.id }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Создана</td>
+                            <td>{{ object.created_at }}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Просмотры</td>
+                            <td>{{ object.views_count }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}>

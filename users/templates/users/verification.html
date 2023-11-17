@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-3">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font_weight-normal">Проверка почты</h4>
+           </div>
+            <div class="card-body">
+                <form method="post" action="" class="form-floating">
+                    {%  csrf_token  %}
+                    <div class="mb-3">
+                        <label for="user_code">Код подтверждения</label>
+                        <input
+                                type="text"
+                                name="user-code"
+                                class="form-control"
+                                id="user-code"
+                                placeholder="Код подтверждения" required>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'users:login' %}">Подтвердить</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

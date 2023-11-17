@@ -1,0 +1,16 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+    <div class="px-4 ">
+        <div class="col-6">
+            <h2>Mailing Details</h2>
+            <p>Mailing ID: {{ mailing.id }}</p>
+            <p>Start Time: {{ mailing.start_time }}</p>
+            <p>End Time: {{ mailing.end_time }}</p>
+            {% for message in messages %}
+                <p>Message ID: {{ message.id }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

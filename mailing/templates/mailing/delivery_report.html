@@ -1,0 +1,27 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+  <h1>Отчет о доставке рассылок</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Дата и время</th>
+        <th>Статус</th>
+        <th>Ответ сервера</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in delivery_logs %}
+        <tr>
+          <td>{{ log.timestamp }}</td>
+          <td>{{ log.status }}</td>
+          <td>{{ log.response }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Нет данных о доставке</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

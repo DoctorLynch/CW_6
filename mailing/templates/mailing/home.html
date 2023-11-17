@@ -1,0 +1,53 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-12 mb-5">
+    <div class="row md-5">
+        <h4> Сервис рассылки сообщений</h4>
+        <div class="col">
+            <div class="card shadow-sm text-center" style="background: #e0e0e0">
+                <figure class="p-3 mb-0">
+                    Создано рассылок: {{ count_mailing }} .<br>
+                    <br>
+                    Количество активных рассылок: {{ active_mailings_count }}.<br>
+                    <br>
+                    Количество уникальных клиентов {{ unique_clients_count }}:
+                </figure>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row text-center">
+        {% for item in random_blog_posts %}
+            <div class="col-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ item.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'blog:detail' item.slug %}">
+                            <img alt="Фото" class="card-img-top" style="width: 75%"
+                                 src="{{ item.preview_image|media_url }} ">
+                        </a>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li>Содержание: {{ item.content|truncatechars:100 }}</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'blog:detail' item.slug %}" class="btn btn-sm btn-outline-secondary">Подробно</a>
+                                {% if item.owner.email == user.email or 'Managers' in user_group_names %}
+                                    <a href="{% url 'blog:update' item.slug %}"
+                                       class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                    <a href="{% url 'blog:delete' item.slug %}"
+                                       class="btn btn-sm btn-outline-secondary">Удалить</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <br>
+{% endblock %}

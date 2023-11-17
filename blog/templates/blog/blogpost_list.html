@@ -1,0 +1,62 @@
+{% extends 'mailing/base.html' %}
+
+{% load my_tags %}
+
+{% block content %}
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить запись</a>
+    </div>
+    <div class="row text-center">
+        {% for item in object_list %}
+            <div class="col-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ item.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'blog:detail' item.slug %}">
+                            <img alt="Фото товара" style="width: 75%" src="{% mediafile item.preview_image %} "/>
+                        </a>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li>Содержание: {{ item.content|truncatechars:100 }}</li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'blog:detail' item.slug %}" class="btn btn-sm btn-outline-secondary">Подробно</a>
+                                {% if item.owner.email == user.email or 'Managers' in user_group_names %}
+                                    <a href="{% url 'blog:update' item.slug %}"
+                                       class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                                    <a href="{% url 'blog:delete' item.slug %}"
+                                       class="btn btn-sm btn-outline-secondary">Удалить</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <nav aria-label="...">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'blog:list' %}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Предыдущая</a>
+                </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'blog:list' %}?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}
